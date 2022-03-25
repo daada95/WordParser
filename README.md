@@ -6,6 +6,7 @@ A web tool to parse the Word documents into flash cards ready for studying.
 Workflow:
 - Branching strategy? - https://stackoverflow.com/questions/2428722/git-branch-strategy-for-small-dev-team
 - Kanban - https://pl.wikipedia.org/wiki/Kanban
+- Product Backlog Items etc. - https://wordparserapp.atlassian.net/wiki/spaces/WO/pages/327681/Requirements+PBI+DoR+DoD+AC
 - Other - to be discussed
 
 Style guides:
@@ -15,6 +16,7 @@ Style guides:
 
 Project tools:
 - Jira - https://wordparserapp.atlassian.net/jira/software/projects/WPA/boards/1/roadmap
+- Confluence - https://wordparserapp.atlassian.net/wiki/spaces/WO/pages
 - Slack - ** link here **
 
 Other:
