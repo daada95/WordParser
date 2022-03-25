@@ -7,6 +7,7 @@ Workflow:
 - Branching strategy? - https://stackoverflow.com/questions/2428722/git-branch-strategy-for-small-dev-team
 - Kanban - https://pl.wikipedia.org/wiki/Kanban
 - Product Backlog Items etc. - https://wordparserapp.atlassian.net/wiki/spaces/WO/pages/327681/Requirements+PBI+DoR+DoD+AC
+- Git & GitHub - https://wordparserapp.atlassian.net/wiki/spaces/WO/pages/720897/Git+GitHub
 - Other - to be discussed
 
 Style guides:
