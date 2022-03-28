@@ -13,12 +13,12 @@ Workflow:
 Style guides:
 - JS - https://www.w3schools.com/js/js_conventions.asp
 - HTML - https://www.w3schools.com/html/html5_syntax.asp
-- Python - ** link here **
+- Python - https://www.w3schools.com/python/python_syntax.asp
 
 Project tools:
 - Jira - https://wordparserapp.atlassian.net/jira/software/projects/WPA/boards/1/roadmap
 - Confluence - https://wordparserapp.atlassian.net/wiki/spaces/WO/pages
-- Slack - ** link here **
+- Slack - https://join.slack.com/t/slack-kkf4075/shared_invite/zt-15wyjszev-_FytKKTU9R60Nu08wsgSAQ
 
 Other:
 - Oracle VMs - https://www.oracle.com/pl/cloud/free/,
