@@ -1,18 +1,28 @@
 # Fonts used in doc: Title / Heading 1 / Heading 2 / Normal
-
 from docx import Document
+import json
 
+flashcards = dict()
 
-docs = Document("/Users/wojciechziarnik/Desktop/Test_files/plik_testowy.docx")
-flashcards = {}
+def create_flashcards(path):
+    docs = Document(path)
+    heading = str()
+    text = str()
+    title = str()
+    for paragraph in docs.paragraphs:
+        if paragraph.style.name == 'Title':
+            title = paragraph.text
+        elif paragraph.style.name == ("Heading 1"):
+            heading = paragraph.text
+        elif paragraph.style.name == "Normal":
+            text = paragraph.text
+    flashcards[title] = heading
+    flashcards[heading] = text
+    return flashcards
 
-headings = []
-texts = []
-for paragraph in docs.paragraphs:
-    if paragraph.style.name == "Heading 2":
-        headings.append(paragraph.text)
-    elif paragraph.style.name == "Normal":
-        texts.append(paragraph.text)
+def flashcard_to_json():
+    with open('json_file','w') as json_file:
+        json.dump(flashcards,json_file)
 
-print(headings)
-print(texts)
+create_flashcards('/Users/wojciechziarnik/Desktop/Test_files/plik_testowy.docx')
+flashcard_to_json()
