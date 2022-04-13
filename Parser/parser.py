@@ -12,7 +12,7 @@ def create_flashcards(path):
     for paragraph in docs.paragraphs:
         if paragraph.style.name == 'Title':
             title = paragraph.text
-        elif paragraph.style.name == ("Heading 1"):
+        elif paragraph.style.name == "Heading 1":
             heading = paragraph.text
         elif paragraph.style.name == "Normal":
             text = paragraph.text
@@ -21,8 +21,9 @@ def create_flashcards(path):
     return flashcards
 
 def flashcard_to_json():
-    with open('json_file','w') as json_file:
+    with open('json_file.json','w+') as json_file:
         json.dump(flashcards,json_file)
 
-create_flashcards('/Users/wojciechziarnik/Desktop/Test_files/plik_testowy.docx')
-flashcard_to_json()
+if __name__ == '__main__':
+    create_flashcards('/Users/wojciechziarnik/Desktop/Test_files/plik_testowy.docx')
+    flashcard_to_json()
