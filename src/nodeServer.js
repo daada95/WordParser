@@ -14,15 +14,23 @@ serverOne.listen(portIndex, function(request, response) {
 serverOne.post('/upload', function (request, response) {
   let form = new formidable.IncomingForm();
   form.parse(request, function(error, fields, file) {
+<<<<<<< HEAD
 
       if (file) {
         let fileUpload = file.fileupload;
+=======
+      if (file) {
+        let maxFileSize = 15000000;
+        let fileUpload = file.fileupload;
+        let fileSize = fileUpload.size;
+>>>>>>> 49c37a94496245029318400f1135dfc036dfeb78
         let fileType = fileUpload.mimetype;
         let oldFilePath = fileUpload.filepath;
         let fileName = fileUpload.originalFilename;        
         let newFilePath = __dirname + '/public/files/'; 
         newFilePath += fileName;
 
+<<<<<<< HEAD
         switch (fileType) {
           case 'application/msword':
           case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
@@ -37,3 +45,23 @@ serverOne.post('/upload', function (request, response) {
       };
     });
 });
+=======
+        if (fileSize < maxFileSize) {
+          switch (fileType) {
+            case 'application/msword':
+            case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+            fs.rename(oldFilePath, newFilePath, function() {
+                response.write('Upload successful!');
+                response.end();
+            });
+            break;
+            default:
+            response.end('Sorry, wrong filetype. Please upload .doc or docx. Thanks.');
+          }
+        } else {
+          response.end('Sorry, your file is too big. Try with a smaller one (max. 15 MB)');
+        }
+      };
+    });
+});
+>>>>>>> 49c37a94496245029318400f1135dfc036dfeb78
