@@ -11,7 +11,6 @@ def listening():
     while True:
         files = [x for x in listdir(path) if isfile(join(path,x))]
         print(files)
-
         for i in os.listdir(path):
             full_path = os.path.join(path, i)
             if os.path.isfile(full_path):
