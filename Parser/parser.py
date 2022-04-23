@@ -6,23 +6,24 @@ flashcards = dict()
 
 def create_flashcards(path):
     docs = Document(path)
-    heading = str()
-    text = str()
-    title = str()
+    acc = {}
     for paragraph in docs.paragraphs:
-        if paragraph.style.name == 'Title':
-            title = paragraph.text
-        elif paragraph.style.name == ("Heading 1"):
-            heading = paragraph.text
-        elif paragraph.style.name == "Normal":
-            text = paragraph.text
-    flashcards[title] = heading
-    flashcards[heading] = text
+        if len(paragraph.text) > 1:
+            if paragraph.style.name == 'Title':
+                title = paragraph.text
+            elif paragraph.style.name == "Heading 1":
+                heading = paragraph.text
+            elif paragraph.style.name == "Normal":
+                text = paragraph.text
+                flashcards[heading] = text
+                acc[title] = flashcards
+
     return flashcards
 
 def flashcard_to_json():
-    with open('json_file','w') as json_file:
+    with open('json_file.json','w+', encoding="utf8") as json_file:
         json.dump(flashcards,json_file)
 
-create_flashcards('/Users/wojciechziarnik/Desktop/Test_files/plik_testowy.docx')
-flashcard_to_json()
+if __name__ == '__main__':
+    create_flashcards('/Users/wojciechziarnik/Desktop/Test_files/mongodb_commands.docx')
+    flashcard_to_json()
