@@ -1,0 +1,24 @@
+<html>
+    <head><title> FlashCard Creator - Register! </title> </head>
+    <body>
+        <h1> FlashCard Creator </h1>
+        <h2> Intro </h2>
+        <p>Hi, </p>
+        <p>Welcome to our app. The sole purpose of its existence is letting you learn with the use of flashcards you can create yourself by parsing a Word file.</p>
+        <form action='/registerUser' method='POST'>
+                <div>
+                <label for='email'>Your email:</label>
+                <input name='email' id='email' type='email' aria-required='true'>
+                </div>
+                <br>
+                <div>
+                <label for='username'>Your username:</label>
+                <input name='username' id='name' type='text' aria-required='true'>
+                </div>
+                <br>
+                <div>
+                <input type='submit' value='Register'>
+                </div>
+        </form>
+    </body>
+</html>
