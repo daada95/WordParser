@@ -1,3 +1,4 @@
 json_file.json
-.env
+venv/
 Parser/json_file.json
+.idea/
