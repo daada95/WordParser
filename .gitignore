@@ -2,3 +2,4 @@ json_file.json
 venv/
 Parser/json_file.json
 .idea/
+/flask_app/__pycache__/
