@@ -6,3 +6,5 @@ Parser/json_file.json
 tests/__pycache__/
 /__pycache__/
 /flask_app/data.sqlite
+/.DS_Store
+.DS_Store

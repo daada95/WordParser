@@ -13,5 +13,6 @@ class User(db.Model):
 class Flashcard(db.Model):
     __tablename__ = 'flashcards'
     id = db.Column(db.Integer(), primary_key=True)
+    title = db.Column(db.String(length=30), unique=True)
     content = db.Column(db.String(length=200), unique=True)
     author = db.Column(db.Integer(), db.ForeignKey('user.id'))
