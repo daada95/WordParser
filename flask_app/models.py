@@ -9,6 +9,8 @@ class User(db.Model):
     password_hash = db.Column(db.String(length=60), nullable=False)
     flashcards = db.relationship('Flashcard', backref='flashcard_author', lazy=True)
 
+    # there will be the password getter & setter to hash passwords.
+
 
 class Flashcard(db.Model):
     __tablename__ = 'flashcards'
