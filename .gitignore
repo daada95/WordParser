@@ -1,10 +1,6 @@
-json_file.json
-venv/
 Parser/json_file.json
 .idea/
-/flask_app/__pycache__/
-tests/__pycache__/
-/__pycache__/
-/flask_app/data.sqlite
 /.DS_Store
 .DS_Store
+.venv/
+__pycache__/
