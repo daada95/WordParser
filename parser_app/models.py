@@ -13,6 +13,7 @@
 #
 # class Flashcard(models.Model):
 #     id =
+#     category =
 #     title =
 #     content =
 #     author =
