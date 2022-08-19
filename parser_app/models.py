@@ -10,4 +10,4 @@ class Flashcard(models.Model):
     content = models.TextField(unique=True, help_text="Content (reverse) of flashcard.")
 
     def __str__(self):
-        return self.category, self.title, self.content
+        return self.title

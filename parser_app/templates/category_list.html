@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}
+Categories of flashcards
+{% endblock %}
+{% block content %}
+<p>Categories of yours flashcards:</p>
+{% for fc in object_list %}
+<p></pr><a href="category/{{fc.id}}">{{ fc.category }}</a></p>
+{% endfor %}
+{% endblock %}
