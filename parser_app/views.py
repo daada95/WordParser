@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.views.generic import TemplateView, ListView, DetailView
 from .models import Flashcard
 from django.shortcuts import get_object_or_404
@@ -6,8 +5,8 @@ from django.shortcuts import get_object_or_404
 # Create your views here.
 
 
-def index(request):
-    return HttpResponse("Hello!")
+class HomePageView(TemplateView):
+    template_name = 'home.html'
 
 
 class AboutView(TemplateView):

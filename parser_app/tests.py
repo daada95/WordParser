@@ -1,6 +1,5 @@
 from django.test import TestCase, RequestFactory, Client
 from parser_app.models import Flashcard
-from parser_app.views import index
 
 
 class TestFlashcardModel(TestCase):
@@ -16,20 +15,15 @@ class TestFlashcardModel(TestCase):
 
 # tests for views
 
+
 class TestViews(TestCase):
-    def setUp(self):
-        self.factory = RequestFactory()
-
-    def test_index_view(self):
-        request = self.factory.get('')
-        response = index(request)
-        self.assertEquals(response.status_code, 200)
-
-
-class TestAboutView(TestCase):
     def setUp(self):
         self.client = Client()
 
+    def test_home_view(self):
+        response = self.client.get('')
+        self.assertEquals(response.status_code, 200)
+
     def test_about_view(self):
-        response = self.client.get('/parser-app/about')
+        response = self.client.get('/about')
         self.assertEquals(response.status_code, 200)
