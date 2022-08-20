@@ -1,4 +1,4 @@
-from django.test import TestCase, RequestFactory, Client
+from django.test import TestCase, Client
 from parser_app.models import Flashcard
 
 

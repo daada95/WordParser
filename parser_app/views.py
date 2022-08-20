@@ -1,5 +1,6 @@
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import TemplateView, ListView, DetailView, FormView
 from .models import Flashcard
+from .forms import FlashcardForm
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
@@ -24,3 +25,12 @@ class CategoryDetailView(DetailView):
 
     def get_object(self, **kwargs):
         return get_object_or_404(Flashcard, id=self.kwargs.get("pk"))
+
+
+class FlashcardCreateView(FormView):
+    template_name = 'create_flashcard.html'
+    form_class = FlashcardForm
+    success_url = '/'
+
+    def form_valid(self, form):
+        return super().form_valid(form)
