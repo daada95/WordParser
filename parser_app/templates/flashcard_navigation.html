@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}
+Flashcard navigation
+{% endblock %}
+{% block content %}
+<p>Hi in a Parser app! Here you can:</p>
+<ul>
+    <li><button type="button"><a href="{% url 'flashcard_create' %}">Create a flashcard manually</a></button></li>
+    <li><button type="button"><a href="{% url 'category' %}">List all of your flashcards by they category</a></button></li>
+</ul>
+{% endblock %}
