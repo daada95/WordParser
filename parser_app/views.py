@@ -18,15 +18,18 @@ class FlashcardNavigation(TemplateView):
     template_name = 'flashcard_navigation.html'
 
 
-class FlashcardsCategoryView(ListView):
+# CRUD on categories:
+
+
+class CategoryListView(ListView):
     template_name = 'categories/category_list.html'
-    model = Flashcard
+    model = FlashcardCategory
 
 
 class CategoryCreate(CreateView):
     model = FlashcardCategory
-    template_name = "categories/category_create.html"
     fields = ["category"]
+    template_name = "categories/category_create.html"
     success_url = reverse_lazy("home_page")
 
 
@@ -36,8 +39,23 @@ class CategoryUpdate(UpdateView):
     fields = ["category"]
     success_url = reverse_lazy('home_page')
 
+    def get_object(self, **kwargs):
+        return get_object_or_404(FlashcardCategory, id=self.kwargs.get("pk"))
 
-class FlashcardsCategoryDetailView(DetailView):
+
+class CategoryDelete(DeleteView):
+    template_name = "categories/category_delete.html"
+    model = FlashcardCategory
+    success_url = reverse_lazy("home_page")
+
+    def get_object(self, **kwargs):
+        return get_object_or_404(FlashcardCategory, id=self.kwargs.get("pk"))
+
+
+# CRUD on Flashcards:
+
+
+class FlashcardsDetailView(DetailView):
     model = Flashcard
     template_name = "categories/category_details.html"
 
@@ -52,11 +70,14 @@ class FlashcardCreate(CreateView):
     success_url = reverse_lazy("home_page")
 
 
-class FlashcardUpdate(UpdateView):  # I have some bug here.. Can't update test category.
+class FlashcardUpdate(UpdateView):
     template_name = "flashcards/update_flashcard.html"
     model = Flashcard
     fields = ["category", "title", "content"]
     success_url = reverse_lazy("category")
+
+    def get_object(self, **kwargs):
+        return get_object_or_404(Flashcard, id=self.kwargs.get("pk"))
 
 
 class FlashcardDelete(DeleteView):

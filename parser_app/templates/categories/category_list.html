@@ -5,8 +5,8 @@ Categories of flashcards
 {% block content %}
 {% if object_list %}
     <p>Categories of yours flashcards:</p>
-    {% for fc in object_list %}
-        <p></pr><a href="flashcards/{{fc.id}}">{{ fc.category }}</a></p>
+    {% for i in object_list %}
+        <p><a href="flashcards/{{i.id}}">{{ i.category }}</a></p>
     {% endfor %}
 {% else %}
     <p>Yoy don't have any flashcards. Go <a href="{% url 'flashcard_create' %}">upload</a> some!</p>
