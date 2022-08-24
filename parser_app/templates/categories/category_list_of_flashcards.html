@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}
+List of your flashcards
+{% endblock %}
+{% block content %}
+{% if object_list %}
+    <p>Your flashcards:</p>
+    {% for flashcard in object_list %}
+        <p>{{ flashcard }}</p>
+    {% endfor %}
+{% else %}
+    <p>Yoy don't have any flashcards. Go <a href="{% url 'flashcard_create' %}">create</a> some</p>
+    <p>.. or simply <a href="#">upload</a> some documents.</p>
+{% endif %}
+{% endblock %}

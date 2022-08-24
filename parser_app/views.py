@@ -26,11 +26,19 @@ class CategoryListView(ListView):
     model = FlashcardCategory
 
 
+class CategoryListDetailView(DetailView):   # here have some bug. I cannot list all flashcards of certain category
+    model = Flashcard
+    template_name = "categories/category_list_of_flashcards.html"
+
+    def get_object(self, **kwargs):
+        return get_object_or_404(Flashcard, id=self.kwargs.get("pk"))
+
+
 class CategoryCreate(CreateView):
     model = FlashcardCategory
     fields = ["category"]
     template_name = "categories/category_create.html"
-    success_url = reverse_lazy("home_page")
+    success_url = reverse_lazy("category")
 
 
 class CategoryUpdate(UpdateView):

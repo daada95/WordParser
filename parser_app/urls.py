@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import HomePageView, AboutView, CategoryListView, FlashcardsDetailView, \
     FlashcardCreate, FlashcardUpdate, FlashcardDelete, FlashcardNavigation, CategoryCreate, CategoryUpdate, \
-    CategoryDelete
+    CategoryDelete, CategoryListDetailView
 
 urlpatterns = [
     path('', HomePageView.as_view(), name="home_page"),
@@ -9,6 +9,7 @@ urlpatterns = [
     path('flashcards-nav/', FlashcardNavigation.as_view(), name="flashcards_navigation"),
     path('category/', CategoryListView.as_view(), name="category"),
     path('category/add/', CategoryCreate.as_view(), name="category_create"),
+    path('category/<int:pk>', CategoryListDetailView.as_view(), name="category_create"),
     path('category/<int:pk>/update', CategoryUpdate.as_view(), name="category_update"),
     path('category/<int:pk>/delete', CategoryDelete.as_view(), name="category_delete"),
     path('flashcards/add', FlashcardCreate.as_view(), name="flashcard_create"),
