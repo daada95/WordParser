@@ -5,10 +5,10 @@ from django.db import models
 
 class FlashcardCategory(models.Model):
     id = models.IntegerField(primary_key=True)
-    category = models.CharField(max_length=30, unique=True, help_text="Category of flashcards.")
+    name = models.CharField(max_length=30, unique=True, help_text="Category of flashcards.")
 
     def __str__(self):
-        return self.category
+        return self.name
 
 
 class Flashcard(models.Model):

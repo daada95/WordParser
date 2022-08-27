@@ -21,25 +21,46 @@ class FlashcardNavigation(TemplateView):
 # CRUD on categories:
 
 
-class CategoryListView(ListView):
-    template_name = 'categories/category_list.html'
-    model = FlashcardCategory
-
-
-class CategoryListDetailView(ListView):   # here have some bug. I cannot list all flashcards of certain category
-    model = Flashcard
-    template_name = "categories/category_list_of_flashcards.html"
-    # queryset = Flashcard.objects.filter(FlashcardCategory.id)
-
-
 class CategoryCreate(CreateView):
+    """
+    Making CRUD -> C -> Create.
+    View where user can manually create a flashcard.
+    When user will submit a flashcard, he/she is going to be moved to FlashcardNavigation view.
+    """
     model = FlashcardCategory
     fields = ["category"]
     template_name = "categories/category_create.html"
     success_url = reverse_lazy("category")
 
 
+class CategoryListView(ListView):
+    """
+    Making CRUD -> R -> Read.
+    View where user can see all his/hers categories listed on website.
+    Then user can go further to chosen category to see all flashcards made in that category.
+    """
+    template_name = 'categories/category_list.html'
+    model = FlashcardCategory
+
+
+class CategoryListDetailView(ListView):
+    """
+    Making CRUD -> R -> Read.
+    View where user can see all flashcards made in chosen category.
+    """
+    model = Flashcard
+    template_name = "categories/category_list_of_flashcards.html"
+
+    def get_queryset(self):
+        id = self.kwargs.get("pk")
+        return Flashcard.objects.filter(category__id=id)    # type: ignore
+
+
 class CategoryUpdate(UpdateView):
+    """
+    Making CRUD -> U -> Update.
+    View where user can update information about chosen category.
+    """
     template_name = "categories/category_update.html"
     model = FlashcardCategory
     fields = ["category"]
@@ -50,6 +71,11 @@ class CategoryUpdate(UpdateView):
 
 
 class CategoryDelete(DeleteView):
+    """
+    Making CRUD -> D -> Delete.
+    View where user can delete chosen category.
+    User will be asked if he/she is sure if he/she wants to delete a category.
+    """
     template_name = "categories/category_delete.html"
     model = FlashcardCategory
     success_url = reverse_lazy("home_page")
