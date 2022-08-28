@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <title>
+         {% block title %}
+         {% endblock %}
+    </title>
+</head>
+<body>
+    <div class="topnav">
+      <a class="active" href="{% url 'home_page' %}">Home</a>
+      <a href="{% url 'flashcards_navigation' %}">Flashcards</a>
+      <a href="#learning-portal">Learning portal</a>
+      <a href="#login">Login</a>
+      <a href="{% url 'about' %}">About</a>
+    </div>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

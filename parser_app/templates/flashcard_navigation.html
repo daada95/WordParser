@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}
+Flashcard navigation
+{% endblock %}
+{% block content %}
+<p>Hi in a Parser app! What we are going to do today?</p>
+<p>Something with categories?</p>
+<ul>
+    <li><button type="button"><a href="{% url 'category' %}">List all of your categories</a></button></li>
+    <li><button type="button"><a href="{% url 'category_create' %}">Create new one</a></button></li>
+</ul>
+<p>.. or maybe with flashcards?</p>
+<ul>
+    <li><button type="button"><a href="{% url 'flashcard_create' %}">Create a flashcard manually</a></button></li>
+    <li><button type="button"><a href="#">Upload new document</a></button></li>
+</ul>
+{% endblock %}

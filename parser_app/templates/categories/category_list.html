@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}
+Categories of flashcards
+{% endblock %}
+{% block content %}
+{% if object_list %}
+    <p>Categories of yours flashcards:</p>
+    {% for i in object_list %}
+        <p><a href="{{i.id}}">{{ i.name }}</a></p>
+    {% endfor %}
+{% else %}
+    <p>Yoy don't have any categories. Go <a href="{% url 'category_create' %}">create</a> some!</p>
+{% endif %}
+{% endblock %}
