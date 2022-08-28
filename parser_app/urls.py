@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import HomePageView, AboutView, CategoryListView, FlashcardsDetailView, \
+from .views import HomePageView, AboutView, CategoryListView, \
     FlashcardCreate, FlashcardUpdate, FlashcardDelete, FlashcardNavigation, CategoryCreate, CategoryUpdate, \
     CategoryDelete, CategoryListDetailView
 
@@ -13,7 +13,6 @@ urlpatterns = [
     path('category/<int:pk>/update', CategoryUpdate.as_view(), name="category_update"),
     path('category/<int:pk>/delete', CategoryDelete.as_view(), name="category_delete"),
     path('flashcards/add', FlashcardCreate.as_view(), name="flashcard_create"),
-    path('flashcards/<int:pk>', FlashcardsDetailView.as_view(), name="category_detail"),
     path('flashcards/<int:pk>/update', FlashcardUpdate.as_view(), name="flashcard_update"),
     path('flashcards/<int:pk>/delete', FlashcardDelete.as_view(), name="flashcard_delete"),
 ]

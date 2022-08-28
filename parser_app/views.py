@@ -28,7 +28,7 @@ class CategoryCreate(CreateView):
     When user will submit a flashcard, he/she is going to be moved to FlashcardNavigation view.
     """
     model = FlashcardCategory
-    fields = ["category"]
+    fields = ["name"]
     template_name = "categories/category_create.html"
     success_url = reverse_lazy("category")
 
@@ -52,8 +52,7 @@ class CategoryListDetailView(ListView):
     template_name = "categories/category_list_of_flashcards.html"
 
     def get_queryset(self):
-        id = self.kwargs.get("pk")
-        return Flashcard.objects.filter(category__id=id)    # type: ignore
+        return Flashcard.objects.filter(category__id=self.kwargs.get("pk"))    # type: ignore
 
 
 class CategoryUpdate(UpdateView):
@@ -63,8 +62,8 @@ class CategoryUpdate(UpdateView):
     """
     template_name = "categories/category_update.html"
     model = FlashcardCategory
-    fields = ["category"]
-    success_url = reverse_lazy('home_page')
+    fields = ["name"]
+    success_url = reverse_lazy('category')
 
     def get_object(self, **kwargs):
         return get_object_or_404(FlashcardCategory, id=self.kwargs.get("pk"))
@@ -85,14 +84,6 @@ class CategoryDelete(DeleteView):
 
 
 # CRUD on Flashcards:
-
-
-class FlashcardsDetailView(DetailView):
-    model = Flashcard
-    template_name = "categories/category_details.html"
-
-    def get_object(self, **kwargs):
-        return get_object_or_404(Flashcard, id=self.kwargs.get("pk"))
 
 
 class FlashcardCreate(CreateView):
