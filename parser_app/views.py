@@ -1,7 +1,9 @@
-from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Flashcard, FlashcardCategory
-from django.shortcuts import get_object_or_404
+from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
+from .models import Flashcard, FlashcardCategory
+from .forms import WordDocumentForm
 
 # Create your views here.
 
@@ -107,3 +109,24 @@ class FlashcardDelete(DeleteView):
     template_name = "flashcards/delete_flashcard.html"
     model = Flashcard
     success_url = reverse_lazy("home_page")
+
+
+# Uploading documents View:
+
+
+def upload_documents_and_parse(request):
+    """
+    Function based view where user can upload his/hers document (only .docx).
+    Then app is going to try to parse the document and create flashcards.
+    If something will go wrong, app is going to inform user.
+    """
+    if request.method == "POST":
+        form = WordDocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            # here I have to implement logic based on parser.py from Parser module
+            return redirect('home_page')
+        else:
+            HttpResponse("Something went wrong. Try again.")
+    else:
+        form = WordDocumentForm()
+    return render(request, "upload_and_parse.html", {"form": form})
