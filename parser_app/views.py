@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
 from .models import Flashcard, FlashcardCategory
 from .forms import WordDocumentForm
+from docx import Document
 
 # Create your views here.
 
@@ -120,10 +121,29 @@ def upload_documents_and_parse(request):
     Then app is going to try to parse the document and create flashcards.
     If something will go wrong, app is going to inform user.
     """
+    category = ''
+    title = ''
+    content = ''
     if request.method == "POST":
         form = WordDocumentForm(request.POST, request.FILES)
         if form.is_valid():
             # here I have to implement logic based on parser.py from Parser module
+            uploaded_document = request.FILES['document']
+            document_to_parse = Document(uploaded_document)
+            for paragraph in document_to_parse.paragraphs:
+                if paragraph.style.name == 'Title':
+                    category = paragraph.text
+                    flashcard_category_instance = FlashcardCategory(name=category)
+                    flashcard_category_instance.save()
+                elif paragraph.style.name == "Heading 1":
+                    title = paragraph.text
+                elif paragraph.style.name == "Normal":
+                    content = paragraph.text
+                flashcard_instance = Flashcard(category=FlashcardCategory.objects.get(name=category),
+                                               title=title,
+                                               content=content)
+                flashcard_instance.save()
+                return HttpResponse("Great! Now we have new category and flashcards!")
             return redirect('home_page')
         else:
             HttpResponse("Something went wrong. Try again.")
