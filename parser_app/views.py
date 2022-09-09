@@ -92,7 +92,7 @@ class CategoryDelete(DeleteView):
 class FlashcardCreate(CreateView):
     template_name = "flashcards/create_flashcard.html"
     model = Flashcard
-    fields = ["category", "title", "content"]
+    fields = ["category", "title", "content", "known"]
     success_url = reverse_lazy("home_page")
 
 
@@ -119,7 +119,7 @@ def upload_documents_and_parse(request):
     """
     Function based view where user can upload his/hers document (only .docx).
     Then app is going to try to parse the document and create flashcards.
-    If something goes wrong, app is going to inform user.
+    If something goes wrong, user will get 404.
     """
     if request.method == "POST":
         form = WordDocumentForm(request.POST, request.FILES)
@@ -128,20 +128,24 @@ def upload_documents_and_parse(request):
             document_to_parse = Document(uploaded_document)
             category = str()
             title = str()
-            content = str()
+            flashcards_dict = dict()
             for paragraph in document_to_parse.paragraphs:
-                if paragraph.style.name == "normal":
-                    content = paragraph.text
+                if paragraph.style.name == 'Title':
+                    category = paragraph.text
+                    flashcard_category_instance = FlashcardCategory(name=category)
+                    flashcard_category_instance.save()
                 elif paragraph.style.name == "Heading 1":
                     title = paragraph.text
-                elif paragraph.style.name == "Title":
-                    category = paragraph.text
-            flashcard_category_instance = FlashcardCategory(name=category)
-            flashcard_category_instance.save()
-            flashcard_instance = Flashcard(category=FlashcardCategory.objects.get(name=category),   # type: ignore
-                                           title=title,
-                                           content=content)
-            flashcard_instance.save()
+                elif paragraph.style.name == "normal":
+                    content = paragraph.text
+                    flashcards_dict[title] = content
+
+            for key in flashcards_dict.keys():
+                flashcard_instance = Flashcard(category=FlashcardCategory.objects.get(name=category),   # type: ignore
+                                               title=key,
+                                               content=flashcards_dict[key])
+                flashcard_instance.save()
+
             return redirect("category")
         else:
             HttpResponse("Something went wrong. Try again.")
