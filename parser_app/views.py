@@ -1,7 +1,10 @@
-from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Flashcard, FlashcardCategory
-from django.shortcuts import get_object_or_404
+from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
+from .models import Flashcard, FlashcardCategory
+from .forms import WordDocumentForm
+from docx import Document
 
 # Create your views here.
 
@@ -89,7 +92,7 @@ class CategoryDelete(DeleteView):
 class FlashcardCreate(CreateView):
     template_name = "flashcards/create_flashcard.html"
     model = Flashcard
-    fields = ["category", "title", "content"]
+    fields = ["category", "title", "content", "known"]
     success_url = reverse_lazy("home_page")
 
 
@@ -107,3 +110,50 @@ class FlashcardDelete(DeleteView):
     template_name = "flashcards/delete_flashcard.html"
     model = Flashcard
     success_url = reverse_lazy("home_page")
+
+
+# Uploading documents View:
+
+
+def upload_documents_and_parse(request):
+    """
+    Function based view where user can upload his/hers document (only .docx).
+    The documents requiremets are on 'about' page.
+    Then app is going to try to parse the document and create flashcards.
+    If something goes wrong, user will get 404.
+    """
+    if request.method == "POST":
+        form = WordDocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            """
+            Here app is checking if form is valid (if the user is uploading correct files).
+            Than document is parsed by paragraphs and paragraphs becomes variables used in creating flashcards.
+            """
+            uploaded_document = request.FILES['document']
+            document_to_parse = Document(uploaded_document)
+            category = str()
+            title = str()
+            flashcards_dict = dict()
+            for paragraph in document_to_parse.paragraphs:
+                if paragraph.style.name == 'Title':
+                    category = paragraph.text
+                    flashcard_category_instance = FlashcardCategory(name=category)
+                    flashcard_category_instance.save()
+                elif paragraph.style.name == "Heading 1":
+                    title = paragraph.text
+                elif paragraph.style.name == "normal":
+                    content = paragraph.text
+                    flashcards_dict[title] = content
+
+            for key in flashcards_dict.keys():
+                flashcard_instance = Flashcard(category=FlashcardCategory.objects.get(name=category),   # type: ignore
+                                               title=key,
+                                               content=flashcards_dict[key])
+                flashcard_instance.save()
+
+            return redirect("category")
+        else:
+            HttpResponse("Something went wrong. Try again.")
+    else:
+        form = WordDocumentForm()
+    return render(request, "upload_and_parse.html", {"form": form})
