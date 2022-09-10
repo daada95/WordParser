@@ -118,12 +118,17 @@ class FlashcardDelete(DeleteView):
 def upload_documents_and_parse(request):
     """
     Function based view where user can upload his/hers document (only .docx).
+    The documents requiremets are on 'about' page.
     Then app is going to try to parse the document and create flashcards.
     If something goes wrong, user will get 404.
     """
     if request.method == "POST":
         form = WordDocumentForm(request.POST, request.FILES)
         if form.is_valid():
+            """
+            Here app is checking if form is valid (if the user is uploading correct files).
+            Than document is parsed by paragraphs and paragraphs becomes variables used in creating flashcards.
+            """
             uploaded_document = request.FILES['document']
             document_to_parse = Document(uploaded_document)
             category = str()
