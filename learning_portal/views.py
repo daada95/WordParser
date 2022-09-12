@@ -9,3 +9,8 @@ from rest_framework import viewsets
 class FlashcardViewSet(viewsets.ModelViewSet):
     queryset = Flashcard.objects.all()
     serializer_class = FlashcardSerializer
+
+
+class FlashcardCategoryViewSet(viewsets.ModelViewSet):
+    queryset = FlashcardCategory.objects.all()
+    serializer_class = FlashcardCategorySerializer
