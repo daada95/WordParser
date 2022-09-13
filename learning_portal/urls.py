@@ -1,11 +1,7 @@
 from rest_framework import routers
 from django.urls import path, include
-from .views import FlashcardViewSet, FlashcardCategoryViewSet
-
-router = routers.DefaultRouter()
-router.register(r'flashcard', FlashcardViewSet)
-router.register(r'flashcard-category', FlashcardCategoryViewSet)
+from .views import FlashcardViewSet, FlashcardCategoryViewSet, StartPage
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('', StartPage.as_view(), name="start_page"),
 ]
