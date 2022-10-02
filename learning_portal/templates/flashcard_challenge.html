@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}
+Challenge
+{% endblock %}
+{% block content %}
+{% if data %}
+<p>{{ data }}</p>
+{% else %}
+<p>There's no queryset list.</p>
+{% endif %}
+{% endblock %}

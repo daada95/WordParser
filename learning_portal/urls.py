@@ -1,7 +1,7 @@
-from rest_framework import routers
-from django.urls import path, include
-from .views import FlashcardViewSet, FlashcardCategoryViewSet, StartPage
+from django.urls import path
+from .views import start_view, learning_portal
 
 urlpatterns = [
-    path('', StartPage.as_view(), name="start_page"),
+    path('', start_view, name="start_page"),
+    path('start-learning/', learning_portal, name="learning_portal"),
 ]

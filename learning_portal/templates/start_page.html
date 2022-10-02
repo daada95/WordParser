@@ -4,10 +4,10 @@ Welcome in learning portal!
 {% endblock %}
 {% block content %}
 <p>Welcome in learning portal!</p>
-<p>Choose your difficulty level:</p>
-<ul>
-    <li>Beginner (10 flashcards) <a href="#beginner">Go!</a></li>
-    <li>Advanced (20 flashcards) <a href="#advanced">Go!</a></li>
-    <li>Pro (30 flashcards) <a href="#pro">Go!</a></li>
-</ul>
+<p>Choose category and number of flashcards:</p>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Let's learn!">
+</form>
 {% endblock %}
