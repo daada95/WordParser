@@ -3,7 +3,7 @@ name = "WordParser"
 version = "0.0.1"
 authors = [
     {name = "Wojciech Ziarnik", email = "woj.ziarnik@gmail.com"},
-    {name = "Dawid Adamczyk"}
+    {name = "Dawid Adamczyk", email = "adawid0805@gmail.com"}
 ]
 description = "Web application to learn using flashcards"
 readme = "README.md"
