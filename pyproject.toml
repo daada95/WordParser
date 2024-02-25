@@ -1,11 +1,32 @@
+[project]
+name = "WordParser"
+version = "0.0.1"
+authors = [
+    {name = "Wojciech Ziarnik", email = "woj.ziarnik@gmail.com"},
+    {name = "Dawid Adamczyk", email = "adawid0805@gmail.com"}
+]
+description = "Web application to learn using flashcards"
+readme = "README.md"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.12",
+]
+requires-python = ">=3.12"
+
+[project.urls]
+Homepage = "https://github.com/daada95/WordParser"
+Documentation = "https://github.com/daada95/WordParser/blob/main/README.md"
+Repository = "https://github.com/daada95/WordParser.git"
+Issues = "https://github.com/daada95/WordParser/issues"
+
 [tool.black]
 line-length = 100
 target-version = ['py311']
 include = '\.pyi?$'
 
-[tool.poetry]
-name = "WordParser"
-version = "0.1.0"
-description = "App to parse word's docs to flashcards"
-license = "MIT"
-authors = ["Wojciech Ziarnik <woj.ziarnik@gmail.com>" , "Dawid Adamczyk"]
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
