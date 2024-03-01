@@ -6,7 +6,6 @@ class CategoriesEnum(Enum):
     TRANSPORT: str = "transport"
     SCHOOL: str = "school"
     PROFESSIONS: str = "professions"
-    IT: str = "it"
 
 
 class EnglishLevelEnum(Enum):
