@@ -20,14 +20,14 @@ class EnglishLevelEnum(Enum):
 
 
 class UnvalidatedWord(BaseModel):
-    _id: str = Field(default_factory=uuid.uuid4, alias="_id")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()), alias="_id")
     word: str
     category: str
     level: str
 
     class Config:
-        allow_population_by_field_name = True
-        schema_extra = {
+        populate_by_name = True
+        json_schema_extra = {
             "example": {
                 "word": "Break the ice",
                 "category": "idioms",
