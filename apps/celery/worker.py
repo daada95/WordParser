@@ -9,11 +9,11 @@ from settings import settings
 celery_worker: Celery = Celery("open_ai_downloader", broker=settings.REDIS_BROKER_URL)
 
 
-def get_random_category(category: CategoriesEnum) -> str:
+def get_random_category() -> str:
     return random.choice(list(CategoriesEnum)).value
 
 
-def get_random_english_level(level: EnglishLevelEnum) -> str:
+def get_random_english_level() -> str:
     return random.choice(list(EnglishLevelEnum)).value
 
 
