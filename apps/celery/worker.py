@@ -19,7 +19,7 @@ def get_random_english_level() -> str:
     return random.choice(list(EnglishLevelEnum)).value
 
 
-def get_new_words_from_AI(category: str, level: str) -> list[str]:
+def get_new_words_from_AI(category: str, level: str) -> str:
     client = openai.OpenAI(api_key=settings.OPENAI_API_KEY)
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
