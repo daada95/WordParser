@@ -32,11 +32,25 @@ def get_new_words_from_AI(category: str, level: str) -> str:
             }
         ],
     )
-    raw_words: str = response.choices[0].message.content
-    return {"category": category, "level": level, "raw_words": raw_words}
+    return response.choices[0].message.content
 
 
 def clean_response_from_AI(words: str) -> list[str]:
     return [
         word for word in words.split() if not any(char.isdigit() for char in word.replace(".", ""))
     ]
+
+
+def save_into_mongodb(collection: str, document: dict[str, Any]) -> None:
+    return get_mongo_db()[collection].insert_one(document)
+
+
+@celery_worker.add_periodic_task
+async def get_words_parse_and_store_in_database():
+    category: str = get_random_category()
+    level: str = get_random_english_level()
+    words_before_cleaning: dict[str, Any] = get_new_words_from_AI(category=category, level=level)
+    cleaned_words = clean_response_from_AI(words_before_cleaning)
+    for word in cleaned_words:
+        document = UnvalidatedWord(level=level, category=category, word=word).model_dump()
+        save_into_mongodb(collection="unvalidated_words", document=document)
