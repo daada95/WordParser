@@ -1,9 +1,11 @@
 import random
+from typing import Any
 
 import openai
 from celery import Celery
 
-from apps.models import CategoriesEnum, EnglishLevelEnum
+from apps.db import get_mongo_db
+from apps.models import CategoriesEnum, EnglishLevelEnum, UnvalidatedWord
 from settings import settings
 
 celery_worker: Celery = Celery("open_ai_downloader", broker=settings.REDIS_BROKER_URL)
