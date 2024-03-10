@@ -1,17 +1,17 @@
 import uuid
-from enum import Enum
+from enum import StrEnum
 
 from pydantic import BaseModel, Field
 
 
-class CategoriesEnum(Enum):
+class CategoriesEnum(StrEnum):
     IDIOMS: str = "idioms"
     TRANSPORT: str = "transport"
     SCHOOL: str = "school"
     PROFESSIONS: str = "professions"
 
 
-class EnglishLevelEnum(Enum):
+class EnglishLevelEnum(StrEnum):
     A1: str = "A1"
     A2: str = "A2"
     B1: str = "B1"
