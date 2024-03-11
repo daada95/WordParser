@@ -45,3 +45,6 @@ virtualenv==20.25.1
 wcwidth==0.2.13
 wheel==0.42.0
 ipython==8.22.1
+openai==1.13.3
+isort==5.13.2
+black==24.2.0
