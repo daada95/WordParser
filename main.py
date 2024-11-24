@@ -1,14 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, UploadFile
 
+app = FastAPI()
 
-def setup_routing(app: FastAPI) -> None:
-    return
-
-
-def create_app() -> FastAPI:
-    app = FastAPI()
-    setup_routing(app)
-    return app
-
-
-app = create_app()
+@app.post("/upload")
+async def upload_file(file: UploadFile):
+    return {"filename": file.name}
