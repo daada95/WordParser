@@ -5,3 +5,4 @@ Parser/json_file.json
 venv/
 __pycache__/
 data
+.python-version
