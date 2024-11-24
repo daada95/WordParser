@@ -16,3 +16,14 @@ A web tool to parse the Word documents into flash cards ready for studying.
 
 
 // work in progress //
+
+### POC (24.11.2024):
+
+Checklist:
+
+- [] Add Minio microservice,
+- [] Add FastAPI application,
+- [] Add first endpoint to enable uploading files,
+- [] Add second endpoint to list parsed data from uploaded file,
+- [] Add code PoC to connect to Minio,
+- [] Run flow described above,
