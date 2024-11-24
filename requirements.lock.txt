@@ -11,10 +11,17 @@ anyio==4.6.2.post1
     #   httpx
     #   starlette
     #   watchfiles
+argon2-cffi==23.1.0
+    # via minio
+argon2-cffi-bindings==21.2.0
+    # via argon2-cffi
 certifi==2024.8.30
     # via
     #   httpcore
     #   httpx
+    #   minio
+cffi==1.17.1
+    # via argon2-cffi-bindings
 click==8.1.7
     # via
     #   typer
@@ -50,6 +57,12 @@ markupsafe==3.0.2
     # via jinja2
 mdurl==0.1.2
     # via markdown-it-py
+minio==7.2.11
+    # via -r requirements.txt
+pycparser==2.22
+    # via cffi
+pycryptodome==3.21.0
+    # via minio
 pydantic==2.10.1
     # via fastapi
 pydantic-core==2.27.1
@@ -77,9 +90,12 @@ typer==0.13.1
 typing-extensions==4.12.2
     # via
     #   fastapi
+    #   minio
     #   pydantic
     #   pydantic-core
     #   typer
+urllib3==2.2.3
+    # via minio
 uvicorn[standard]==0.32.1
     # via
     #   fastapi

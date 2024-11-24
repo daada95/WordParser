@@ -1,1 +1,2 @@
 fastapi[standard]==0.115.5
+minio==7.2.11

@@ -1,1 +1,2 @@
 pip-tools==7.4.1
+ipython==8.29.0
