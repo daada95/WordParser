@@ -6,7 +6,7 @@ case "$1" in
         uvicorn main:app --host 0.0.0.0 --port 8000
         ;;
     run-celery)
-        celery -A your_celery_app_name worker --loglevel=info  # TODO
+        celery -A apps.celery.celery_app.celery_app worker --loglevel=info -E  # TODO
         ;;
     *)
         echo "Użycie: $0 {run-uvicorn|run-celery}"
