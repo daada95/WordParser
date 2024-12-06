@@ -8,6 +8,9 @@ case "$1" in
     run-celery)
         celery -A your_celery_app_name worker --loglevel=info  # TODO
         ;;
+    fastapi-dev)
+        fastapi dev main.py --host "0.0.0.0" --port 8080
+        ;;
     *)
         echo "Użycie: $0 {run-uvicorn|run-celery}"
         exit 1

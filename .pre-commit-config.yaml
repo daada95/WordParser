@@ -1,10 +1,10 @@
 default_language_version:
   python: python3.10
-default_stages: [commit, push, manual]
+default_stages: [pre-commit, pre-push, manual]
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v5.0.0
     hooks:
     - id: check-yaml
     - id: end-of-file-fixer
@@ -14,19 +14,19 @@ repos:
       files: '.*\.py$'
     - id: requirements-txt-fixer
       files: 'requirements\..*\.txt$'
-      stages: [push, manual]
+      stages: [pre-push, manual]
     - id: check-toml
       files: '.*\.toml$'
 
   - repo: https://github.com/psf/black
-    rev: 24.2.0
+    rev: 24.10.0
     hooks:
     - id: black
       args: [--config=pyproject.toml]
       files: '.*\.py$'
 
   - repo: https://github.com/pycqa/flake8
-    rev: 7.0.0
+    rev: 7.1.1
     hooks:
     - id: flake8
       args: [--config=.flake8]
@@ -38,7 +38,7 @@ repos:
       - id: isort
         name: isort (python)
   - repo: https://github.com/jazzband/pip-tools
-    rev: "7.4.0"
+    rev: "7.4.1"
     hooks:
       - id: pip-compile
         files: 'requirements\.txt$'

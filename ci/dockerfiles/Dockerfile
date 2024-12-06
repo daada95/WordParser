@@ -7,8 +7,6 @@ ENV PYTHONUNBUFFERED 1
 
 WORKDIR /srv
 
-COPY ./requirements.lock.txt /srv/requirements.lock.txt
+COPY . /srv/
 
 RUN pip install --upgrade pip && pip install -r /srv/requirements.lock.txt
-
-COPY . /srv/

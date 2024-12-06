@@ -5,9 +5,9 @@ services:
     build:
       context: .
       dockerfile: ./ci/dockerfiles/Dockerfile
-    entrypoint: ./ci/entrypoint.sh run-uvicorn
-    env_file:
-      - .env
+    entrypoint: ./ci/entrypoint.sh fastapi-dev
+    # env_file:
+    #   - .env
     volumes:
       - .:/srv
     expose:
@@ -15,8 +15,8 @@ services:
     ports:
       - "8080:8080"
     restart: always
-    depends_on:
-      - mongodb
+    # depends_on:
+    #   - mongodb
     networks:
       - app-network
     healthcheck:
@@ -26,26 +26,41 @@ services:
       start_period: 20s
       timeout: 10s
 
-  mongodb:
-    image: mongo:7.0
-    env_file:
-      - .env
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+  # mongodb:
+  #   image: mongo:7.0
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+  #     MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+  #   ports:
+  #     - "27017:27017"
+  #   volumes:
+  #     - ./mongo_data:/data/db
+  #   networks:
+  #     - app-network
+
+  # redis:
+  #   image: redis:7-alpine
+
+  minio:
+    image: quay.io/minio/minio
     ports:
-      - "27017:27017"
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: ROOTNAME
+      MINIO_ROOT_PASSWORD: CHANGEME123
     volumes:
-      - ./data:/data/db
+      - ~/minio/data:/data
+    command: server /data --console-address ":9001"
     networks:
       - app-network
-
-  redis:
-    image: redis:7-alpine
 
 networks:
   app-network:
     driver: bridge
 
 volumes:
-  mongo_data:
+  # mongo_data:
+  minio_data:
